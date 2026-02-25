@@ -1,0 +1,557 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --lavender: #8B7AA3;
+    --navy: #7a6991;
+    --cream: #F5F2ED;
+    --white: #FFFFFF;
+    --light-lavender: #C4B5D8;
+    --text-dark: #051C2E;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Abhaya Libre', serif; /* Police officielle forcée */
+    color: var(--text-dark);
+    line-height: 1.8; /* Augmenté pour aérer */
+    overflow-x: hidden;
+    background-color: var(--cream);
+    font-weight: 400;
+    font-size: 17px; /* Base augmentée pour lisibilité (~11-12pt) */
+}
+
+/* --- Bandeau Header --- */
+.header-banner {
+    width: 100%;
+    height: 350px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                url('https://agi-prod-file-upload-public-main-use1.s3.amazonaws.com/9f904605-1ba8-44f6-9c95-bb22569c27c3');
+    background-size: cover;
+    background-position: center;
+}
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+.banner-overlay h1 {
+    color: white;
+    font-family: 'Abhaya Libre', serif;
+    font-size: 3rem; /* Augmenté */
+    text-align: center;
+    padding: 0 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    max-width: 900px;
+}
+
+/* --- Navigation --- */
+nav {
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-container img {
+    height: 100px;
+    width: auto;
+    display: block;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover {
+    color: var(--lavender);
+}
+
+.nav-links .has-subnav > a::after {
+    content: '▼';
+    font-size: 0.7em;
+    margin-left: 5px;
+    transition: transform 0.3s;
+    color: var(--lavender);
+    opacity: 0.7;
+}
+
+.nav-links .has-subnav:hover > a::after {
+    transform: rotate(180deg);
+}
+
+.subnav {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background-color: var(--white);
+    min-width: 280px;
+    padding: 25px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.has-subnav:hover .subnav {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(15px);
+}
+
+.subnav a {
+    text-transform: none;
+    font-size: 1.05rem;
+    font-family: 'Abhaya Libre', serif;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.subnav a:last-child {
+    border-bottom: none;
+}
+.mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.mobile-toggle span {
+    width: 30px;
+    height: 3px;
+    background: var(--navy);
+    transition: 0.3s;
+}
+/* --- Sections Générales --- */
+section {
+    min-height: 80vh;
+    padding: 100px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-margin-top: 120px;
+}
+
+.section-content {
+    max-width: 1200px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 3.8rem; /* Titres principaux très lisibles */
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    color: var(--navy);
+    text-align: center;
+}
+
+h2 {
+    font-size: 3rem; /* Environ 30-36px */
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    margin-bottom: 30px;
+    color: var(--navy);
+    text-align: center;
+}
+
+h3 {
+    font-size: 1.8rem; /* Environ 22-24px */
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: var(--lavender);
+    text-align: center; /* Centrage demandé */
+}
+
+p {
+    font-size: 1.1rem; /* Relatif à body 17px -> ~18-19px */
+    line-height: 1.9;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.centered-text {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* --- Cards --- */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+    justify-items: center;
+}
+
+.card {
+    background: var(--white);
+    padding: 50px 40px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+    margin-bottom: 20px;
+    color: var(--navy);
+}
+
+.card p {
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* --- Engagements avec Fleur --- */
+.engagements-list {
+    max-width: 800px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.engagement-item {
+    margin-bottom: 10px;
+    padding: 30px;
+    background: var(--white);
+    width: 100%;
+    border-left: 4px solid var(--lavender);
+}
+
+.engagement-item h3 {
+    text-align: left;
+    color: var(--navy);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.engagement-item p {
+    text-align: left;
+}
+
+.lavender-separator {
+    width: 30px;
+    height: 30px;
+    margin: 15px 0;
+    background-image: url("icone_gdeprovence-removebg-preview.png"); /* Icône SVG simplifiée forme lavande/fleur */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.6;
+}
+.image-section {
+    width: 100%;
+    height: 500px;
+    background-image: url('champs_lavande_arbre_coucher_soleil.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 60px 0;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.2);
+}
+
+/* --- À Propos (Mise en page pleine) --- */
+#propos {
+    background-color: var(--cream);
+    padding: 80px 40px;
+}
+
+.propos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.propos-image {
+    width: 100%;
+    max-width: 800px;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+
+.propos-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.propos-text {
+    background: var(--white);
+    padding: 60px;
+    max-width: 800px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+/* --- CTA Flottant --- */
+.floating-cta {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--lavender);
+    color: var(--white);
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Abhaya Libre', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 999;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.floating-cta:hover {
+    background-color: var(--navy);
+    transform: translateY(-3px);
+}
+
+/* --- Footer & Formulaires --- */
+/* (Le reste de ton CSS pour footer, formulaire, mobile reste identique) */
+
+footer {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.contact-form {
+    max-width: 700px;
+    margin: 50px auto;
+    background: var(--white);
+    padding: 50px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    font-family: 'Abhaya Libre', serif;
+    font-size: 1.1rem;
+    transition: border-color 0.3s;
+    background-color: #FAFAFA;
+}
+
+.submit-btn {
+    background: var(--lavender);
+    color: var(--white);
+    padding: 18px 50px;
+    border: none;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    width: 100%;
+    font-family: 'Abhaya Libre', serif;
+    border-radius: 2px;
+}
+
+.submit-btn:hover {
+    background: var(--navy);
+    transform: translateY(-2px);
+}
+
+/* Responsive Mobile */
+@media (max-width: 768px) {
+                .banner-overlay h1 {
+                font-size: 1.8rem;
+            }
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+    
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        padding: 20px;
+        display: none;
+    }
+    
+    .nav-links.active { display: flex; }
+    
+    .floating-cta {
+        bottom: 15px;
+        right: 15px;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Section À propos spécifique */
+.about-hero {
+    background: linear-gradient(rgba(245, 242, 237, 0.8), rgba(245, 242, 237, 0.8)),
+                url('champs_lavande_arbre_coucher_soleil.jpg') center/cover;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.about-content {
+    background: var(--white);
+    padding: 80px 60px;
+    max-width: 900px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.about-content h2 {
+    color: var(--navy);
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+    letter-spacing: 1.2px;
+}
+
+.about-bio {
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--text-dark);
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+
+.about-bio strong {
+    color: var(--lavender);
+    font-weight: 500;
+}
+
+.photo-credit {
+    font-size: 0.85rem;
+    color: var(--navy);
+    opacity: 0.7;
+    margin-top: 20px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .mobile-toggle {
+        display: flex;
+    }
+    .about-content {
+        padding: 50px 30px;
+        margin: 20px;
+    }
+    .about-content h2 {
+        font-size: 2.2rem;
+    }
+    .about-bio {
+        font-size: 1rem;
+    }
+}
+/* --- Language Switch --- */
+.lang-switch {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.lang-switch a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    padding: 6px 10px;
+    border: 1px solid var(--lavender);
+    color: var(--navy);
+    transition: all 0.3s ease;
+}
+
+.lang-switch a:hover {
+    background: var(--lavender);
+    color: var(--white);
+}
+
+.active-lang {
+    background: var(--lavender);
+    color: var(--white) !important;
+}
